@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "FOREWORK",
+    "slug": "forework-native",
+    "scheme": "forework",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6B3AC2"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.forework.app",
+      "associatedDomains": [
+        "applinks:forework.vercel.app"
+      ]
+    },
+    "android": {
+      "package": "com.forework.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            { "scheme": "https", "host": "forework.vercel.app", "pathPrefix": "/verify-email" },
+            { "scheme": "https", "host": "forework.vercel.app", "pathPrefix": "/reset-password" },
+            { "scheme": "https", "host": "forework.vercel.app", "pathPrefix": "/description" },
+            { "scheme": "https", "host": "forework.vercel.app", "pathPrefix": "/jobs" },
+            { "scheme": "https", "host": "forework.vercel.app", "pathPrefix": "/ats" }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
+    }
+  }
+}
