@@ -7,7 +7,7 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import { ActivityIndicator, View } from "react-native";
 import { store } from "../src/redux/store";
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from "../src/utils/secureStorage";
 import { setUser } from "../src/redux/authSlice";
 import API from "../src/utils/axiosInstance";
 import { USER_API_ENDPOINT } from "../src/utils/endpoints";

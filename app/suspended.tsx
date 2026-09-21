@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable, Linking, SafeAreaView } from "react-native";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from "../src/utils/secureStorage";
 import { setUser } from "../src/redux/authSlice";
 import { TOKEN_KEY } from "../src/utils/axiosInstance";
 import API from "../src/utils/axiosInstance";

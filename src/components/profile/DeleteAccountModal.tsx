@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from "../../utils/secureStorage";
 import API from "../../utils/axiosInstance";
 import { USER_API_ENDPOINT } from "../../utils/endpoints";
 import { TOKEN_KEY } from "../../utils/axiosInstance";

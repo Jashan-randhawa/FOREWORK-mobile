@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from "../../src/utils/secureStorage";
 import { setUser } from "../../src/redux/authSlice";
 import { TOKEN_KEY } from "../../src/utils/axiosInstance";
 import useGetAllAppliedJobs from "../../src/hooks/useGetAllAppliedJobs";

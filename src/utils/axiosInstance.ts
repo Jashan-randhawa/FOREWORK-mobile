@@ -11,7 +11,7 @@
  * also be present.
  */
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from "./secureStorage";
 import { router } from "expo-router";
 import { store } from "../redux/store";
 import { setUser } from "../redux/authSlice";
