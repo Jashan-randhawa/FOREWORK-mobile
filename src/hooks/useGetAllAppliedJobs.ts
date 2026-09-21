@@ -1,15 +1,17 @@
 import { useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAllAppliedJobs } from "../redux/jobSlice";
 import { APPLICATION_API_ENDPOINT } from "../utils/endpoints";
 import API from "../utils/axiosInstance";
 
 export const useGetAllAppliedJobs = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((store: any) => store.auth);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchAppliedJobs = useCallback(async () => {
+    if (!user) return;
     try {
       setLoading(true);
       setError(null);
@@ -22,11 +24,13 @@ export const useGetAllAppliedJobs = () => {
     } finally {
       setLoading(false);
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   useEffect(() => {
-    fetchAppliedJobs();
-  }, [fetchAppliedJobs]);
+    if (user) {
+      fetchAppliedJobs();
+    }
+  }, [user, fetchAppliedJobs]);
 
   return { loading, error, refetch: fetchAppliedJobs };
 };
