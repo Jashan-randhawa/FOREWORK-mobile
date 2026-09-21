@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E1B4B" />
+      <stop offset="100%" stop-color="#311042" />
+    </linearGradient>
+
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="50%" stop-color="#EC4899" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Card Shadow -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; fill: #FFFFFF; letter-spacing: -1px; }
+    .subtitle { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 400; fill: #CBD5E1; }
+    .tag { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #FFFFFF; }
+    .card-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 14px; fill: #FFFFFF; }
+    .card-val { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; font-size: 26px; }
+    .card-sub { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 11px; fill: #94A3B8; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1200" height="420" rx="16" fill="url(#bgGrad)" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="150" cy="80" r="180" fill="#6366F1" opacity="0.18" filter="url(#glow)" />
+  <circle cx="1050" cy="340" r="220" fill="#EC4899" opacity="0.15" filter="url(#glow)" />
+  <circle cx="900" cy="100" r="140" fill="#8B5CF6" opacity="0.2" filter="url(#glow)" />
+
+  <!-- Decorative Grid Overlay -->
+  <g stroke="#334155" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="70" x2="1200" y2="70" />
+    <line x1="0" y1="140" x2="1200" y2="140" />
+    <line x1="0" y1="210" x2="1200" y2="210" />
+    <line x1="0" y1="280" x2="1200" y2="280" />
+    <line x1="0" y1="350" x2="1200" y2="350" />
+    <line x1="200" y1="0" x2="200" y2="420" />
+    <line x1="400" y1="0" x2="400" y2="420" />
+    <line x1="600" y1="0" x2="600" y2="420" />
+    <line x1="800" y1="0" x2="800" y2="420" />
+    <line x1="1000" y1="0" x2="1000" y2="420" />
+  </g>
+
+  <!-- Left Content: Logo & Headlines -->
+  <!-- Brand Icon Badge -->
+  <g transform="translate(80, 55)">
+    <rect width="56" height="56" rx="14" fill="#6B3AC2" />
+    <rect width="56" height="56" rx="14" fill="url(#accentGrad)" opacity="0.3" />
+    <path d="M18 16 H38 V22 H24 V26 H36 V32 H24 V40 H18 Z" fill="#FFFFFF" />
+  </g>
+
+  <!-- Platform Badge -->
+  <g transform="translate(150, 68)">
+    <rect width="150" height="30" rx="15" fill="#1E293B" stroke="#475569" stroke-width="1" />
+    <circle cx="16" cy="15" r="4" fill="#10B981" />
+    <text x="28" y="20" class="tag" fill="#94A3B8">EXPO SDK 57 • v1.0</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="80" y="165" class="title" font-size="44">FOREWORK <tspan fill="url(#accentGrad)">MOBILE</tspan></text>
+
+  <!-- Subheadline -->
+  <text x="80" y="205" class="subtitle" font-size="18">Next-Gen Recruitment Platform &amp; Deterministic ATS Resume Intelligence</text>
+  <text x="80" y="230" class="subtitle" font-size="14" fill="#94A3B8">Engineered with React Native, Expo Router, NativeWind v4 &amp; Redux Toolkit</text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(80, 275)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="165" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="18" y="23" class="tag">🎯 Candidate Feed</text>
+
+    <!-- Pill 2 -->
+    <rect x="177" y="0" width="175" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="195" y="23" class="tag">🏢 Recruiter Cockpit</text>
+
+    <!-- Pill 3 -->
+    <rect x="364" y="0" width="180" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="382" y="23" class="tag">🧠 100-Pt ATS Engine</text>
+
+    <!-- Pill 4 -->
+    <rect x="556" y="0" width="160" height="36" rx="18" fill="#1E293B" stroke="#334155" stroke-width="1" />
+    <text x="574" y="23" class="tag">🔒 Dual-Auth JWT</text>
+  </g>
+
+  <!-- Bottom Stat Badges -->
+  <g transform="translate(80, 345)">
+    <text x="0" y="0" class="tag" font-size="13" fill="#64748B">39/39 JEST TESTS PASSED  •  ZERO DOM APIS  •  APPLE GUIDELINE 5.1.1(v) COMPLIANT  •  EAS READY</text>
+  </g>
+
+  <!-- Right Visual Cards (Mockup Floating Displays) -->
+  <g transform="translate(790, 45)" filter="url(#cardShadow)">
+    <!-- Card 1: ATS Parseability & Match -->
+    <rect width="330" height="150" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+    <circle cx="35" cy="38" r="14" fill="#10B981" fill-opacity="0.2" />
+    <text x="35" y="43" text-anchor="middle" font-size="14" fill="#10B981">✓</text>
+    <text x="60" y="42" class="card-title">ATS Compatibility Engine</text>
+    <rect x="250" y="28" width="60" height="20" rx="10" fill="#065F46" />
+    <text x="280" y="42" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#34D399">ats_v1.0</text>
+
+    <g transform="translate(25, 70)">
+      <!-- Score 1 -->
+      <text x="0" y="24" class="card-val" fill="#10B981">94<tspan font-size="16">%</tspan></text>
+      <text x="0" y="42" class="card-sub">PARSEABILITY</text>
+
+      <!-- Divider -->
+      <line x1="120" y1="5" x2="120" y2="45" stroke="#334155" stroke-width="1" />
+
+      <!-- Score 2 -->
+      <text x="145" y="24" class="card-val" fill="#8B5CF6">88<tspan font-size="16">%</tspan></text>
+      <text x="145" y="42" class="card-sub">JOB MATCH FIT</text>
+
+      <!-- Badge Tier -->
+      <rect x="220" y="8" width="70" height="30" rx="8" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-width="1" />
+      <text x="255" y="28" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#10B981">OPTIMAL</text>
+    </g>
+
+    <!-- Card 2: Recruiter / Candidate Telemetry -->
+    <g transform="translate(0, 165)">
+      <rect width="330" height="135" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+
+      <circle cx="35" cy="35" r="14" fill="#6366F1" fill-opacity="0.2" />
+      <text x="35" y="40" text-anchor="middle" font-size="14" fill="#818CF8">💼</text>
+      <text x="60" y="39" class="card-title">Senior React Native Lead</text>
+      <text x="60" y="55" class="card-sub">Google Meet • Scheduled 10:30 AM</text>
+
+      <!-- Status Pill -->
+      <rect x="25" y="78" width="130" height="32" rx="8" fill="#047857" />
+      <text x="90" y="99" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">✓ Shortlisted</text>
+
+      <!-- Action Button -->
+      <rect x="165" y="78" width="140" height="32" rx="8" fill="#4F46E5" />
+      <text x="235" y="99" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Join Video Room ↗</text>
+    </g>
+  </g>
+</svg>
