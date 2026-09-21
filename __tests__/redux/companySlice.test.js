@@ -2,7 +2,7 @@ import companyReducer, {
   setSingleCompany,
   setCompanies,
   setSearchCompanyByText,
-} from "../../src/redux/companyslice";
+} from "../../src/redux/companySlice";
 
 describe("Redux companySlice (TC-REC-001, TC-REC-003)", () => {
   const initialState = {
