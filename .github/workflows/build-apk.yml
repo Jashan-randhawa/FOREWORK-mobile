@@ -79,20 +79,7 @@ jobs:
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
       # ---------------------------------------------------------------
-      # 5. Cache the Android NDK + CMake installs
-      #    (avoids the "Preparing / Installing NDK / CMake" steps seen
-      #    in the raw log, which run on every cold runner)
-      # ---------------------------------------------------------------
-      - name: Cache Android NDK & CMake
-        uses: actions/cache@v4
-        with:
-          path: |
-            /usr/local/lib/android/sdk/ndk
-            /usr/local/lib/android/sdk/cmake
-          key: ndk-cmake-${{ runner.os }}-27.1.12297006-3.22.1
-
-      # ---------------------------------------------------------------
-      # 6. Install JS dependencies
+      # 5. Install JS dependencies
       #    --legacy-peer-deps kept to match the current dependency tree;
       #    remove once the peer-dep graph is cleaned up.
       # ---------------------------------------------------------------
@@ -100,7 +87,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       # ---------------------------------------------------------------
-      # 7. Sanity-check native module version alignment before building.
+      # 6. Sanity-check native module version alignment before building.
       #    Fails fast with a clear message instead of a 10-minute Gradle
       #    run that dies at assertWorkletsVersionTask.
       # ---------------------------------------------------------------
@@ -117,7 +104,7 @@ jobs:
           fi
 
       # ---------------------------------------------------------------
-      # 8. Restrict to a single ABI for faster dev/debug builds.
+      # 7. Restrict to a single ABI for faster dev/debug builds.
       #    Skipped entirely for release builds so all four ABIs still
       #    ship in the production APK/AAB.
       # ---------------------------------------------------------------
@@ -127,7 +114,7 @@ jobs:
           echo "ORG_GRADLE_PROJECT_reactNativeArchitectures=arm64-v8a" >> "$GITHUB_ENV"
 
       # ---------------------------------------------------------------
-      # 9. Expo prebuild — regenerates native android/ project files.
+      # 8. Expo prebuild — regenerates native android/ project files.
       #    Safe to run every time; required after any native dependency
       #    version bump (e.g. the Worklets fix).
       # ---------------------------------------------------------------
@@ -135,7 +122,7 @@ jobs:
         run: npx expo prebuild --platform android --no-install
 
       # ---------------------------------------------------------------
-      # 10. Gradle build
+      # 9. Gradle build
       # ---------------------------------------------------------------
       - name: Build with Gradle
         working-directory: android
@@ -144,7 +131,7 @@ jobs:
           ./gradlew ${{ github.event.inputs.build_variant || 'assembleDebug' }} --stacktrace --build-cache
 
       # ---------------------------------------------------------------
-      # 11. Upload the resulting APK(s) as a workflow artifact
+      # 10. Upload the resulting APK(s) as a workflow artifact
       # ---------------------------------------------------------------
       - name: Locate and upload APK
         uses: actions/upload-artifact@v4
@@ -155,7 +142,7 @@ jobs:
           retention-days: 14
 
       # ---------------------------------------------------------------
-      # 12. Surface Gradle's own problems report on failure for faster
+      # 11. Surface Gradle's own problems report on failure for faster
       #     debugging (the log mentioned this report but it's easy to miss)
       # ---------------------------------------------------------------
       - name: Upload Gradle problems report on failure
