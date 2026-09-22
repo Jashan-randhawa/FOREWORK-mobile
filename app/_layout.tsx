@@ -58,11 +58,16 @@ function SessionBootstrap({ children }: { children: React.ReactNode }) {
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView className="flex-1">
+    <GestureHandlerRootView style={{ flex: 1, height: "100%", width: "100%" }}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SessionBootstrap>
-            <Stack screenOptions={{ headerShown: false }} />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { flex: 1 },
+              }}
+            />
           </SessionBootstrap>
         </PersistGate>
       </Provider>

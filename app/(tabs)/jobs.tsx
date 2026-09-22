@@ -74,7 +74,7 @@ export default function JobsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Top Header & Search Area */}
       <View className="px-5 pt-3 pb-3 border-b border-border bg-card">
         <View className="flex-row items-center justify-between">
@@ -197,6 +197,7 @@ export default function JobsScreen() {
         </View>
       ) : (
         <FlatList
+          style={{ flex: 1 }}
           data={allJobs}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => <JobCard job={item} />}

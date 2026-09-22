@@ -78,8 +78,13 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
+      <ScrollView
+        className="flex-1"
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Top App Header */}
         <View className="px-5 pt-3 pb-2 flex-row items-center justify-between">
           <View>

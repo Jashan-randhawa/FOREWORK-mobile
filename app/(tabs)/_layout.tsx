@@ -7,6 +7,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        sceneContainerStyle: { flex: 1 },
         tabBarActiveTintColor: "#6B3AC2",
         tabBarInactiveTintColor: "#8E8799",
         tabBarStyle: {

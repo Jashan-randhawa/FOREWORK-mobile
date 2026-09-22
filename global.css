@@ -65,10 +65,38 @@
   }
 }
 
-/*
-  NOT ported (no native equivalent / not needed):
-  - -webkit-tap-highlight-color, touch-action: manipulation (web-only touch tuning)
-  - scroll-behavior: smooth, prefers-reduced-motion media query
-    (use react-native-reanimated's reduced-motion API instead if needed)
-  - .no-scrollbar utility (native ScrollView has no visible scrollbar by default)
-*/
+/* Web-specific scrolling and full-height fixes */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Ensure React Native Web ScrollViews allow vertical touch drag & wheel scrolling */
+[data-focusable="true"],
+div[style*="overflow-y: auto"],
+div[style*="overflow-y: scroll"],
+div[style*="overflow: auto"],
+div[style*="overflow: scroll"],
+[data-rnw-scrollview] {
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+

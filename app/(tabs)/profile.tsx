@@ -89,8 +89,13 @@ export default function ProfileScreen() {
   const initial = user.fullname?.charAt(0).toUpperCase() || "U";
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
+      <ScrollView
+        className="flex-1"
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Top Header Card */}
         <View className="m-4 rounded-3xl border border-border bg-card p-5 shadow-sm">
           <View className="flex-row items-center justify-between">
