@@ -1,53 +1,167 @@
-name: Build Android APK
+name: Build APK (Android)
+
+# Cancel older in-progress runs on the same branch/PR when a new commit lands
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "**.ts"
+      - "**.tsx"
+      - "android/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/build-apk.yml"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      build_variant:
+        description: "Gradle variant to build"
+        required: false
+        default: "assembleDebug"
+        type: choice
+        options:
+          - assembleDebug
+          - assembleRelease
+      single_abi:
+        description: "Build only arm64-v8a (faster, good for dev/test)"
+        required: false
+        default: true
+        type: boolean
+
+env:
+  NODE_ENV: production
 
 jobs:
   build:
     name: Build Android APK
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
+      # ---------------------------------------------------------------
+      # 1. Checkout
+      # ---------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # ---------------------------------------------------------------
+      # 2. Node.js setup with built-in npm cache
+      # ---------------------------------------------------------------
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
-      - name: Setup Java JDK
+      # ---------------------------------------------------------------
+      # 3. Java (Gradle needs a JDK — Temurin 17 matches current RN/Expo)
+      # ---------------------------------------------------------------
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      # ---------------------------------------------------------------
+      # 4. Gradle caching (wrapper, dependencies, build cache) —
+      #    this is what eliminates most of the repeated download/setup time
+      # ---------------------------------------------------------------
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          accept-android-sdk-licenses: true
-          packages: platform-tools platforms;android-35 build-tools;35.0.0 platforms;android-34 build-tools;34.0.0
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
+      # ---------------------------------------------------------------
+      # 5. Cache the Android NDK + CMake installs
+      #    (avoids the "Preparing / Installing NDK / CMake" steps seen
+      #    in the raw log, which run on every cold runner)
+      # ---------------------------------------------------------------
+      - name: Cache Android NDK & CMake
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/local/lib/android/sdk/ndk
+            /usr/local/lib/android/sdk/cmake
+          key: ndk-cmake-${{ runner.os }}-27.1.12297006-3.22.1
+
+      # ---------------------------------------------------------------
+      # 6. Install JS dependencies
+      #    --legacy-peer-deps kept to match the current dependency tree;
+      #    remove once the peer-dep graph is cleaned up.
+      # ---------------------------------------------------------------
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Prebuild Android project
-        run: npx expo prebuild --platform android --clean
-
-      - name: Build Android APK
+      # ---------------------------------------------------------------
+      # 7. Sanity-check native module version alignment before building.
+      #    Fails fast with a clear message instead of a 10-minute Gradle
+      #    run that dies at assertWorkletsVersionTask.
+      # ---------------------------------------------------------------
+      - name: Verify Reanimated / Worklets compatibility
         run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          WORKLETS_VERSION=$(node -p "require('react-native-worklets/package.json').version")
+          REANIMATED_VERSION=$(node -p "require('react-native-reanimated/package.json').version")
+          echo "react-native-worklets: $WORKLETS_VERSION"
+          echo "react-native-reanimated: $REANIMATED_VERSION"
+          WORKLETS_MINOR=$(echo "$WORKLETS_VERSION" | cut -d. -f2)
+          if [ "$WORKLETS_MINOR" -lt 13 ]; then
+            echo "::error::react-native-worklets ($WORKLETS_VERSION) is below the 0.13.x floor required by react-native-reanimated ($REANIMATED_VERSION). Run: npm install react-native-worklets@^0.13.0 --save --legacy-peer-deps"
+            exit 1
+          fi
 
-      - name: Upload APK Artifact
+      # ---------------------------------------------------------------
+      # 8. Restrict to a single ABI for faster dev/debug builds.
+      #    Skipped entirely for release builds so all four ABIs still
+      #    ship in the production APK/AAB.
+      # ---------------------------------------------------------------
+      - name: Restrict to arm64-v8a (dev builds only)
+        if: ${{ github.event.inputs.single_abi != 'false' && github.event.inputs.build_variant != 'assembleRelease' }}
+        run: |
+          echo "ORG_GRADLE_PROJECT_reactNativeArchitectures=arm64-v8a" >> "$GITHUB_ENV"
+
+      # ---------------------------------------------------------------
+      # 9. Expo prebuild — regenerates native android/ project files.
+      #    Safe to run every time; required after any native dependency
+      #    version bump (e.g. the Worklets fix).
+      # ---------------------------------------------------------------
+      - name: Expo prebuild (Android)
+        run: npx expo prebuild --platform android --no-install
+
+      # ---------------------------------------------------------------
+      # 10. Gradle build
+      # ---------------------------------------------------------------
+      - name: Build with Gradle
+        working-directory: android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew ${{ github.event.inputs.build_variant || 'assembleDebug' }} --stacktrace --build-cache
+
+      # ---------------------------------------------------------------
+      # 11. Upload the resulting APK(s) as a workflow artifact
+      # ---------------------------------------------------------------
+      - name: Locate and upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: FOREWORK-Android-App
-          path: android/app/build/outputs/apk/debug/*.apk
-          retention-days: 30
+          name: app-${{ github.event.inputs.build_variant || 'assembleDebug' }}-${{ github.run_number }}
+          path: android/app/build/outputs/apk/**/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      # ---------------------------------------------------------------
+      # 12. Surface Gradle's own problems report on failure for faster
+      #     debugging (the log mentioned this report but it's easy to miss)
+      # ---------------------------------------------------------------
+      - name: Upload Gradle problems report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-problems-report-${{ github.run_number }}
+          path: android/build/reports/problems/problems-report.html
+          if-no-files-found: ignore
