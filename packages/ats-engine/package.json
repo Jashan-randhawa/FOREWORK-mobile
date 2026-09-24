@@ -1,0 +1,45 @@
+{
+  "name": "@jashan-randhawa/forework-ats-engine",
+  "version": "1.0.0",
+  "description": "FOREWORK ATS Resume Intelligence Engine — deterministic 100-point scoring rubric with React Native UI components for resume parseability, job match analysis, and optimization recommendations.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ats",
+    "resume",
+    "scoring",
+    "applicant-tracking-system",
+    "forework",
+    "react-native",
+    "job-match",
+    "parseability"
+  ],
+  "author": "Jashanpreet Singh <jashan-randhawa>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jashan-randhawa/FOREWORK-mobile.git",
+    "directory": "packages/ats-engine"
+  },
+  "homepage": "https://github.com/Jashan-randhawa/FOREWORK-mobile/tree/main/packages/ats-engine",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.5.0",
+    "@types/react": ">=18.0.0"
+  }
+}
