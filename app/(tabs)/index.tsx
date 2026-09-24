@@ -87,56 +87,100 @@ export default function HomeScreen() {
         keyboardShouldPersistTaps="handled"
       >
         {/* Top App Header */}
-        <View className="px-5 pt-3 pb-2 flex-row items-center justify-between">
+        <View
+          style={{ backgroundColor: "#6B3AC2" }}
+          className="px-5 pt-5 pb-4 flex-row items-center justify-between"
+        >
           <View>
-            <Text className="text-xl font-extrabold text-foreground">
-              FORE<Text className="text-primary">WORK</Text>
+            <Text style={{ fontSize: 22, fontWeight: "900", color: "#FFFFFF", letterSpacing: -0.5 }}>
+              FORE<Text style={{ color: "#E9D8FD" }}>WORK</Text>
             </Text>
-            <Text className="text-xs text-muted-foreground">
-              {user ? `Hello, ${user.fullname}` : "Verified Career Marketplace"}
+            <Text style={{ fontSize: 12, color: "#C4B5FD", fontWeight: "500" }}>
+              {user ? `Welcome back, ${user.fullname?.split(" ")[0]} 👋` : "India's Verified Career Marketplace"}
             </Text>
           </View>
           <Pressable
             onPress={() => router.push("/notifications" as any)}
-            className="h-10 w-10 items-center justify-center rounded-full bg-secondary border border-border"
+            style={{
+              height: 42,
+              width: 42,
+              borderRadius: 21,
+              backgroundColor: "rgba(255,255,255,0.2)",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.3)",
+            }}
           >
-            <Icon name="bell" size={18} color="#6B3AC2" />
+            <Icon name="bell" size={20} color="#FFFFFF" />
           </Pressable>
         </View>
 
-        {/* Hero Section */}
-        <View className="mx-4 mt-3 rounded-3xl bg-primary/10 border border-primary/20 p-5">
-          <View className="flex-row items-center gap-1.5 self-start rounded-full bg-primary/20 px-3 py-1 mb-2.5">
-            <Icon name="sparkles" size={12} color="#6B3AC2" />
-            <Text className="text-[11px] font-bold text-primary">India's Verified Marketplace</Text>
-          </View>
-
-          <Text className="text-2xl font-black text-foreground tracking-tight leading-tight">
-            Find & Accelerate Your{"\n"}
-            <Text className="text-primary">Dream Career</Text>
+        {/* Hero Search Section */}
+        <View
+          style={{ backgroundColor: "#6B3AC2" }}
+          className="px-5 pb-6"
+        >
+          <Text
+            style={{
+              fontSize: 26,
+              fontWeight: "900",
+              color: "#FFFFFF",
+              lineHeight: 32,
+              marginBottom: 4,
+              marginTop: 8,
+            }}
+          >
+            Find Your{"\n"}
+            <Text style={{ color: "#E9D8FD" }}>Dream Career</Text> ✨
+          </Text>
+          <Text style={{ fontSize: 13, color: "#C4B5FD", marginBottom: 16, lineHeight: 18 }}>
+            Thousands of verified tech positions with real-time status tracking.
           </Text>
 
-          <Text className="mt-2 text-xs text-muted-foreground leading-relaxed">
-            Thousands of verified engineering and tech positions with transparent telemetry.
-          </Text>
-
-          {/* Search Input Box */}
-          <View className="mt-4 flex-row items-center rounded-2xl bg-card border border-border px-3 py-1.5 shadow-sm">
-            <Icon name="search" size={16} color="#8E8799" />
+          {/* Search Bar */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "#FFFFFF",
+              borderRadius: 16,
+              paddingHorizontal: 14,
+              paddingVertical: 4,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.15,
+              shadowRadius: 12,
+              elevation: 8,
+            }}
+          >
+            <Icon name="search" size={18} color="#6B3AC2" />
             <TextInput
               placeholder="Title, skill, or company..."
-              placeholderTextColor="#8E8799"
+              placeholderTextColor="#A09BB8"
               value={keyword}
               onChangeText={setKeyword}
               onSubmitEditing={handleSearch}
               returnKeyType="search"
-              className="flex-1 px-3 py-2 text-xs text-foreground"
+              style={{
+                flex: 1,
+                paddingHorizontal: 12,
+                paddingVertical: 12,
+                fontSize: 14,
+                color: "#1C1033",
+                fontWeight: "500",
+              }}
             />
             <Pressable
               onPress={handleSearch}
-              className="rounded-xl bg-primary px-3.5 py-2 shadow-xs"
+              style={{
+                backgroundColor: "#6B3AC2",
+                borderRadius: 12,
+                paddingHorizontal: 16,
+                paddingVertical: 9,
+              }}
             >
-              <Text className="text-xs font-bold text-primary-foreground">Search</Text>
+              <Text style={{ fontSize: 13, fontWeight: "800", color: "#FFFFFF" }}>Search</Text>
             </Pressable>
           </View>
 
@@ -144,47 +188,108 @@ export default function HomeScreen() {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="mt-3.5 flex-row gap-1.5"
+            style={{ marginTop: 14 }}
           >
             {TRENDING_SEARCHES.map((tag) => (
               <Pressable
                 key={tag}
                 onPress={() => handleQuickTagClick(tag)}
-                className="rounded-full bg-card border border-border px-2.5 py-1 mr-1.5"
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.18)",
+                  borderColor: "rgba(255,255,255,0.35)",
+                  borderWidth: 1,
+                  borderRadius: 20,
+                  paddingHorizontal: 12,
+                  paddingVertical: 5,
+                  marginRight: 8,
+                }}
               >
-                <Text className="text-[10px] font-medium text-foreground">#{tag}</Text>
+                <Text style={{ fontSize: 12, fontWeight: "600", color: "#FFFFFF" }}>#{tag}</Text>
               </Pressable>
             ))}
           </ScrollView>
         </View>
 
-        {/* Platform Advantages Carousel */}
+        {/* Stats Strip */}
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: "#F9F7FF",
+            borderBottomWidth: 1,
+            borderBottomColor: "#E4DFEF",
+          }}
+        >
+          {[
+            { value: "100%", label: "Verified Jobs" },
+            { value: "< 48h", label: "Response Time" },
+            { value: "0%", label: "Ghosting" },
+          ].map((stat, i) => (
+            <View
+              key={i}
+              style={{
+                flex: 1,
+                paddingVertical: 12,
+                alignItems: "center",
+                borderRightWidth: i < 2 ? 1 : 0,
+                borderRightColor: "#E4DFEF",
+              }}
+            >
+              <Text style={{ fontSize: 16, fontWeight: "900", color: "#6B3AC2" }}>{stat.value}</Text>
+              <Text style={{ fontSize: 10, fontWeight: "600", color: "#8E7BA8", marginTop: 1 }}>{stat.label}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Platform Advantages */}
         <View className="mt-6 px-5">
-          <Text className="text-xs font-bold uppercase tracking-wider text-primary">
-            Platform Benefits
-          </Text>
-          <Text className="text-lg font-extrabold text-foreground mt-0.5">
-            Built for Modern Hiring
-          </Text>
+          <View className="flex-row items-center justify-between mb-3">
+            <View>
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "#6B3AC2", textTransform: "uppercase", letterSpacing: 1 }}>
+                Why FOREWORK
+              </Text>
+              <Text style={{ fontSize: 18, fontWeight: "900", color: "#1C1033", marginTop: 2 }}>
+                Built for Modern Hiring
+              </Text>
+            </View>
+          </View>
 
           <ScrollView
             horizontal
-            pagingEnabled
             showsHorizontalScrollIndicator={false}
-            className="mt-3 flex-row gap-3"
           >
             {PLATFORM_PILLARS.map((item, idx) => (
               <View
                 key={idx}
-                className="w-[280px] mr-3 rounded-2xl border border-border bg-card p-4 shadow-sm"
+                style={{
+                  width: 220,
+                  marginRight: 12,
+                  borderRadius: 20,
+                  borderWidth: 1.5,
+                  borderColor: "#E4DFEF",
+                  backgroundColor: "#FFFFFF",
+                  padding: 16,
+                  shadowColor: "#6B3AC2",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.06,
+                  shadowRadius: 8,
+                  elevation: 3,
+                }}
               >
-                <View className="h-9 w-9 items-center justify-center rounded-xl bg-primary/15 mb-2.5">
-                  <Icon name={item.icon} size={18} color="#6B3AC2" />
+                <View
+                  style={{
+                    height: 44,
+                    width: 44,
+                    borderRadius: 14,
+                    backgroundColor: "#EDE9FF",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Icon name={item.icon} size={22} color="#6B3AC2" />
                 </View>
-                <Text className="text-sm font-bold text-foreground">{item.title}</Text>
-                <Text className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                  {item.desc}
-                </Text>
+                <Text style={{ fontSize: 13, fontWeight: "800", color: "#1C1033", marginBottom: 4 }}>{item.title}</Text>
+                <Text style={{ fontSize: 11, color: "#7C6F9A", lineHeight: 16 }}>{item.desc}</Text>
               </View>
             ))}
           </ScrollView>
@@ -192,36 +297,45 @@ export default function HomeScreen() {
 
         {/* High-Demand Specializations */}
         <View className="mt-6 px-5">
-          <View className="flex-row items-center justify-between">
+          <View className="flex-row items-center justify-between mb-3">
             <View>
-              <Text className="text-xs font-bold uppercase tracking-wider text-primary">
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "#6B3AC2", textTransform: "uppercase", letterSpacing: 1 }}>
                 Explore Domains
               </Text>
-              <Text className="text-lg font-extrabold text-foreground mt-0.5">
+              <Text style={{ fontSize: 18, fontWeight: "900", color: "#1C1033", marginTop: 2 }}>
                 Popular Categories
               </Text>
             </View>
             <Pressable onPress={() => router.push("/(tabs)/browse")}>
-              <Text className="text-xs font-bold text-primary">View All →</Text>
+              <Text style={{ fontSize: 13, fontWeight: "700", color: "#6B3AC2" }}>View All →</Text>
             </Pressable>
           </View>
 
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            className="mt-3 flex-row gap-3"
-          >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {FEATURED_CATEGORIES.map((cat, idx) => (
               <Pressable
                 key={idx}
                 onPress={() => handleQuickTagClick(cat.title)}
-                className="w-40 mr-3 rounded-2xl border border-border bg-card p-3.5 shadow-sm"
+                style={{
+                  width: 140,
+                  marginRight: 12,
+                  borderRadius: 20,
+                  borderWidth: 1.5,
+                  borderColor: "#E4DFEF",
+                  backgroundColor: "#FFFFFF",
+                  padding: 14,
+                  shadowColor: "#6B3AC2",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.05,
+                  shadowRadius: 6,
+                  elevation: 2,
+                }}
               >
-                <Text className="text-xl mb-1.5">{cat.icon}</Text>
-                <Text className="text-xs font-bold text-foreground" numberOfLines={1}>
+                <Text style={{ fontSize: 24, marginBottom: 8 }}>{cat.icon}</Text>
+                <Text style={{ fontSize: 12, fontWeight: "800", color: "#1C1033" }} numberOfLines={1}>
                   {cat.title}
                 </Text>
-                <Text className="text-[10px] text-muted-foreground mt-0.5" numberOfLines={1}>
+                <Text style={{ fontSize: 10, color: "#8E7BA8", marginTop: 3 }} numberOfLines={1}>
                   {cat.roles}
                 </Text>
               </Pressable>
@@ -230,38 +344,70 @@ export default function HomeScreen() {
         </View>
 
         {/* Latest Jobs Feed */}
-        <View className="mt-6 px-5 pb-8">
-          <View className="flex-row items-center justify-between mb-3">
+        <View style={{ marginTop: 24, paddingHorizontal: 20, paddingBottom: 32 }}>
+          <View className="flex-row items-center justify-between mb-4">
             <View>
-              <Text className="text-xs font-bold uppercase tracking-wider text-primary">
+              <Text style={{ fontSize: 11, fontWeight: "800", color: "#6B3AC2", textTransform: "uppercase", letterSpacing: 1 }}>
                 Active Openings
               </Text>
-              <Text className="text-lg font-extrabold text-foreground mt-0.5">
+              <Text style={{ fontSize: 18, fontWeight: "900", color: "#1C1033", marginTop: 2 }}>
                 Latest Job Listings
               </Text>
             </View>
-            <Pressable onPress={() => router.push("/(tabs)/jobs")}>
-              <Text className="text-xs font-bold text-primary">All Jobs ({allJobs.length}) →</Text>
+            <Pressable
+              onPress={() => router.push("/(tabs)/jobs")}
+              style={{
+                backgroundColor: "#EDE9FF",
+                borderRadius: 12,
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+              }}
+            >
+              <Text style={{ fontSize: 12, fontWeight: "700", color: "#6B3AC2" }}>
+                All ({allJobs.length}) →
+              </Text>
             </Pressable>
           </View>
 
           {loading ? (
-            <View className="py-12 items-center justify-center">
+            <View style={{ paddingVertical: 48, alignItems: "center" }}>
               <ActivityIndicator size="large" color="#6B3AC2" />
-              <Text className="text-xs text-muted-foreground mt-2">Loading live positions...</Text>
+              <Text style={{ fontSize: 12, color: "#8E7BA8", marginTop: 10 }}>Loading live positions...</Text>
             </View>
           ) : error ? (
-            <View className="rounded-2xl border border-destructive/30 bg-destructive/10 p-4 items-center">
-              <Text className="text-xs text-destructive text-center">{error}</Text>
-              <Pressable onPress={refetch} className="mt-2 rounded-lg bg-primary px-3 py-1.5">
-                <Text className="text-xs text-primary-foreground font-semibold">Retry</Text>
+            <View
+              style={{
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: "#FCA5A5",
+                backgroundColor: "#FEF2F2",
+                padding: 16,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#DC2626", textAlign: "center" }}>{error}</Text>
+              <Pressable
+                onPress={refetch}
+                style={{ marginTop: 10, backgroundColor: "#DC2626", borderRadius: 10, paddingHorizontal: 16, paddingVertical: 8 }}
+              >
+                <Text style={{ fontSize: 12, color: "#FFFFFF", fontWeight: "700" }}>Retry</Text>
               </Pressable>
             </View>
           ) : allJobs.length === 0 ? (
-            <View className="rounded-2xl border border-dashed border-border bg-card p-8 items-center text-center">
-              <Icon name="briefcase" size={32} color="#8E8799" />
-              <Text className="text-sm font-bold text-foreground mt-2">No Openings Listed Yet</Text>
-              <Text className="text-xs text-muted-foreground text-center mt-1">
+            <View
+              style={{
+                borderRadius: 20,
+                borderWidth: 1.5,
+                borderStyle: "dashed" as any,
+                borderColor: "#C4B5FD",
+                backgroundColor: "#FAF8FF",
+                padding: 36,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 36, marginBottom: 8 }}>💼</Text>
+              <Text style={{ fontSize: 15, fontWeight: "800", color: "#1C1033" }}>No Openings Yet</Text>
+              <Text style={{ fontSize: 12, color: "#8E7BA8", textAlign: "center", marginTop: 4, lineHeight: 18 }}>
                 New positions are added regularly by vetted hiring teams.
               </Text>
             </View>
