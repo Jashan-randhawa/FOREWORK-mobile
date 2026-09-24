@@ -10,26 +10,20 @@ export default function TabsLayout() {
         sceneContainerStyle: { flex: 1 },
         tabBarActiveTintColor: "#6B3AC2",
         tabBarInactiveTintColor: "#A09BB8",
+        tabBarShowLabel: false, // Labels live inside the pill icon
         tabBarStyle: {
           backgroundColor: "#FFFFFF",
           borderTopColor: "#E4DFEF",
           borderTopWidth: 1,
-          height: 68,
-          paddingBottom: 10,
-          paddingTop: 8,
+          height: 76,
+          paddingBottom: 12,
+          paddingTop: 10,
+          paddingHorizontal: 8,
           shadowColor: "#6B3AC2",
-          shadowOffset: { width: 0, height: -2 },
-          shadowOpacity: 0.08,
-          shadowRadius: 12,
-          elevation: 12,
-        },
-        tabBarLabelStyle: {
-          fontSize: 11,
-          fontWeight: "700",
-          marginTop: 2,
-        },
-        tabBarIconStyle: {
-          marginTop: 2,
+          shadowOffset: { width: 0, height: -4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 16,
+          elevation: 16,
         },
       }}
     >
@@ -38,7 +32,7 @@ export default function TabsLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name="home" color={color} focused={focused} />
+            <TabBarIcon name="home" color={color} focused={focused} label="Home" />
           ),
         }}
       />
@@ -47,7 +41,7 @@ export default function TabsLayout() {
         options={{
           title: "Jobs",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name="briefcase" color={color} focused={focused} />
+            <TabBarIcon name="briefcase" color={color} focused={focused} label="Jobs" />
           ),
         }}
       />
@@ -56,7 +50,7 @@ export default function TabsLayout() {
         options={{
           title: "Browse",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name="search" color={color} focused={focused} />
+            <TabBarIcon name="search" color={color} focused={focused} label="Browse" />
           ),
         }}
       />
@@ -65,7 +59,7 @@ export default function TabsLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name="user" color={color} focused={focused} />
+            <TabBarIcon name="user" color={color} focused={focused} label="Profile" />
           ),
         }}
       />
