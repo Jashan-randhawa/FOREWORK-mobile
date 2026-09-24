@@ -5,7 +5,7 @@ import Icon from "../src/components/common/Icon";
 
 export default function PrivacyPolicyScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Top Header */}
       <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -16,7 +16,13 @@ export default function PrivacyPolicyScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView className="flex-1 px-5 py-5" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 px-5 py-5"
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 48 }}
+      >
         {/* Banner */}
         <View className="mb-6">
           <View className="flex-row items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 self-start mb-2">

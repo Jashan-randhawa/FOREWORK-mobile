@@ -45,7 +45,7 @@ export default function VerifyEmailScreen() {
   }, [token]);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       <View className="flex-1 px-6 justify-center">
         <View className="rounded-2xl border border-border bg-card p-6 items-center text-center">
           {status === "loading" && (

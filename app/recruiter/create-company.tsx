@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Alert,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
@@ -56,7 +57,7 @@ export default function CreateCompanyScreen() {
 
   return (
     <RecruiterGuard>
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
         {/* Top Header */}
         <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
           <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -67,7 +68,13 @@ export default function CreateCompanyScreen() {
           <View style={{ width: 40 }} />
         </View>
 
-        <View className="flex-1 p-5 justify-between">
+        <ScrollView
+          style={{ flex: 1 }}
+          className="flex-1"
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between", padding: 20 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
           <View className="space-y-4">
             <View className="w-14 h-14 rounded-2xl bg-primary/10 items-center justify-center">
               <Icon name="building" size={24} color="#6B3AC2" />
@@ -119,7 +126,7 @@ export default function CreateCompanyScreen() {
               <Text className="text-xs font-bold text-foreground">Cancel</Text>
             </Pressable>
           </View>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </RecruiterGuard>
   );

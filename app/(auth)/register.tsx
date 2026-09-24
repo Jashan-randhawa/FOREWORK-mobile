@@ -89,8 +89,14 @@ export default function RegisterScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1 px-6 py-6" showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
+      <ScrollView
+        className="flex-1 px-6 py-6"
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 48 }}
+      >
         {/* Title */}
         <View className="mb-5">
           <Text className="text-2xl font-black text-foreground tracking-tight">

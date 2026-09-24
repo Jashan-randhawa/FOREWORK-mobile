@@ -66,7 +66,7 @@ export default function RecruiterJobsScreen() {
 
   return (
     <RecruiterGuard>
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
         {/* Top Header */}
         <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
           <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -83,7 +83,13 @@ export default function RecruiterJobsScreen() {
           </Pressable>
         </View>
 
-        <ScrollView className="flex-1 px-4 py-4" showsVerticalScrollIndicator={false}>
+        <ScrollView
+          className="flex-1 px-4 py-4"
+          style={{ flex: 1 }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ paddingBottom: 48 }}
+        >
           {/* Search Input */}
           <View className="rounded-xl border border-border bg-card px-3.5 py-2.5 flex-row items-center gap-2 mb-4">
             <Icon name="search" size={14} color="#8E8799" />

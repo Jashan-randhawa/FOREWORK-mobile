@@ -61,8 +61,14 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1 px-6 justify-center" contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}>
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
+      <ScrollView
+        className="flex-1 px-6"
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center", paddingVertical: 32 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         {/* Branding Header */}
         <View className="mb-6">
           <Text className="text-3xl font-black text-foreground tracking-tight">

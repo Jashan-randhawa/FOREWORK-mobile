@@ -93,7 +93,7 @@ export default function JobApplicantsScreen() {
 
   return (
     <RecruiterGuard>
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
         {/* Top Header */}
         <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
           <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -134,7 +134,13 @@ export default function JobApplicantsScreen() {
             </Pressable>
           </View>
         ) : (
-          <ScrollView className="flex-1 px-4 py-4" showsVerticalScrollIndicator={false}>
+          <ScrollView
+            className="flex-1 px-4 py-4"
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ paddingBottom: 48 }}
+          >
             {/* Vacancy Summary Card */}
             <View className="rounded-2xl border border-border bg-card p-4 mb-4 space-y-1 shadow-2xs">
               <Text className="text-[11px] font-bold text-primary">

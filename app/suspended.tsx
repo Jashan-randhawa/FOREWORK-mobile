@@ -25,7 +25,7 @@ export default function SuspendedAccountScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       <View className="flex-1 items-center justify-center px-6">
         <View className="w-full max-w-sm rounded-3xl border border-destructive/30 bg-card p-6 items-center text-center shadow-md">
           <View className="h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 mb-4">

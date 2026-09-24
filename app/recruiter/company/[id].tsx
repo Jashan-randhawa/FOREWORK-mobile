@@ -100,7 +100,7 @@ export default function CompanySetupScreen() {
 
   return (
     <RecruiterGuard>
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
         {/* Top Header */}
         <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
           <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -139,7 +139,13 @@ export default function CompanySetupScreen() {
             </Pressable>
           </View>
         ) : (
-          <ScrollView className="flex-1 px-5 py-5" showsVerticalScrollIndicator={false}>
+          <ScrollView
+            className="flex-1 px-5 py-5"
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ paddingBottom: 48 }}
+          >
             <View className="space-y-4 mb-10">
               {/* Branding Avatar */}
               <View className="items-center py-2">

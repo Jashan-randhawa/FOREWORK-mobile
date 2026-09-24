@@ -6,6 +6,7 @@ import {
   Pressable,
   ActivityIndicator,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { router } from "expo-router";
 import API from "../../src/utils/axiosInstance";
@@ -40,8 +41,14 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <View className="flex-1 px-6 justify-center">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        className="flex-1 px-6"
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center", paddingVertical: 32 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1 mb-8 self-start">
           <Text className="text-base font-bold text-primary">←</Text>
           <Text className="text-xs font-bold text-foreground">Back</Text>
@@ -104,7 +111,7 @@ export default function ForgotPasswordScreen() {
             </Pressable>
           </View>
         )}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
