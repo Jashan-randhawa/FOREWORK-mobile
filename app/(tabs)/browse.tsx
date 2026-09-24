@@ -95,7 +95,9 @@ export default function BrowseScreen() {
           data={allJobs}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => <JobCard job={item} />}
-          contentContainerStyle={{ padding: 16 }}
+          contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
           refreshing={loading}
           onRefresh={refetch}
           ListEmptyComponent={

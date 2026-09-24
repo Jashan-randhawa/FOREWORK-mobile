@@ -120,7 +120,12 @@ export default function AboutScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView className="flex-1 px-5 py-5" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 px-5 py-5"
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 40 }}
+      >
         {/* 1. Hero Section */}
         <View className="items-center text-center space-y-3 mb-8">
           <View className="flex-row items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800">

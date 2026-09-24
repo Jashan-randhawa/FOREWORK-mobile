@@ -158,7 +158,7 @@ export default function ATSAnalysisScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Top Navigation Header */}
       <View className="flex-row items-center justify-between border-b border-border px-5 py-3.5 bg-card">
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1.5">
@@ -169,7 +169,12 @@ export default function ATSAnalysisScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView className="flex-1 px-4 py-5" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 px-4 py-5"
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 48 }}
+      >
         {/* Banner Section */}
         <View className="items-center text-center space-y-2 mb-6">
           <View className="flex-row items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800">

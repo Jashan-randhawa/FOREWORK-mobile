@@ -82,8 +82,9 @@ export default function HomeScreen() {
       <ScrollView
         className="flex-1"
         style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Top App Header */}
         <View className="px-5 pt-3 pb-2 flex-row items-center justify-between">

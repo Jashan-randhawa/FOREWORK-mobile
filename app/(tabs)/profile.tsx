@@ -93,8 +93,9 @@ export default function ProfileScreen() {
       <ScrollView
         className="flex-1"
         style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Top Header Card */}
         <View className="m-4 rounded-3xl border border-border bg-card p-5 shadow-sm">

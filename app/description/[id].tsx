@@ -172,7 +172,7 @@ export default function JobDescriptionScreen() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Top Header Bar */}
       <View className="flex-row items-center justify-between border-b border-border px-5 py-3 bg-card">
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1">
@@ -184,7 +184,12 @@ export default function JobDescriptionScreen() {
         </Pressable>
       </View>
 
-      <ScrollView className="flex-1 px-5 py-4" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 px-5 py-4"
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 48 }}
+      >
         {/* Company & Title Header Card */}
         <View className="rounded-2xl border border-border bg-card p-5 shadow-sm mb-4">
           <Text className="text-xs font-semibold text-primary">

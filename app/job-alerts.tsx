@@ -107,7 +107,7 @@ export default function JobAlertsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Header */}
       <View className="flex-row items-center justify-between border-b border-border px-5 py-3 bg-card">
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1">
@@ -126,7 +126,8 @@ export default function JobAlertsScreen() {
       <FlatList
         data={alerts}
         keyExtractor={(item) => item._id}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
+        keyboardShouldPersistTaps="handled"
         refreshing={loading}
         onRefresh={fetchAlerts}
         ListHeaderComponent={

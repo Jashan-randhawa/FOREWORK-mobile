@@ -36,7 +36,7 @@ export default function ApplicationsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" style={{ flex: 1 }}>
       {/* Header */}
       <View className="flex-row items-center justify-between border-b border-border px-5 py-3 bg-card">
         <Pressable onPress={() => router.back()} className="flex-row items-center gap-1">
@@ -52,7 +52,8 @@ export default function ApplicationsScreen() {
         keyExtractor={(item) => item._id}
         refreshing={loading}
         onRefresh={refetch}
-        contentContainerStyle={{ padding: 16 }}
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ padding: 16, paddingBottom: 40 }}
         ListHeaderComponent={
           <View className="mb-4">
             <Text className="text-xl font-black text-foreground">My Applications</Text>
